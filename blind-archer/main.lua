@@ -1,3 +1,6 @@
+require "archer"
+require "butterfly"
+
 function love.load()
    -- theme = love.audio.newSource("snd/song.ogg", "stream")
    -- theme:setLooping(true)
@@ -17,7 +20,11 @@ function love.load()
 
    world = love.physics.newWorld(0, 0)
 
-   drawable = {}
+   ch = Archer:new(10, 10)
+   bu = Butterfly:new(20, 10)
+
+   drawable = {ch, bu}
+   updateable = {ch, bu}
 end
 
 function love.update(dt)
@@ -28,6 +35,10 @@ function love.update(dt)
    if gameState == "main" then
    elseif gameState == "intro" then
    elseif gameState == "game_over" then
+   end
+
+   for k, el in pairs(updateable) do
+      el:update(dt)
    end
 end
 
