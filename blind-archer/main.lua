@@ -2,31 +2,34 @@ require "archer"
 require "butterfly"
 
 function love.load()
+   love.graphics.setBackgroundColor(1, 1, 1)
    -- theme = love.audio.newSource("snd/song.ogg", "stream")
    -- theme:setLooping(true)
    -- theme:play()
 
    -- turn off antialiasing
    love.graphics.setDefaultFilter("nearest", "nearest", 1)
-
-   gameState = "main"
-
    sett = settings()
 
+   -- SCALING
    windowWidth = love.graphics.getWidth()
    windowHeight = love.graphics.getHeight()
    xscale = windowWidth / sett.window.x
    yscale = windowHeight / sett.window.y
 
-   world = love.physics.newWorld(0, 0)
 
+   -- Actors
    ch = Archer:new(10, 10)
    bu = Butterfly:new(20, 10)
    ch:couple(bu)
    bu:couple(ch)
 
+   world = love.physics.newWorld(0, 0)
+
    drawable = {ch, bu}
    updateable = {ch, bu}
+
+   gameState = "main"
 end
 
 function love.update(dt)
@@ -52,4 +55,7 @@ function love.draw()
    elseif gameState == "intro" then
    elseif gameState == "game_over" then
    end
+
+   -- draw borders of drawing area
+   love.graphics.rectangle("line", 0, 0, windowWidth, windowHeight)
 end

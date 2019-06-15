@@ -35,14 +35,14 @@ function Char:new(x, y,
    return obj
 end
 
-
 function Char:update(dt)
+   assert(false, "override me")
 end
 
 function Char:draw()
    local offset = 0
    if self.direction < 0 then
-      offset = 32 * yscale
+      offset = self.w * yscale
    end
 
    local spriteNum = math.floor(
@@ -51,7 +51,7 @@ function Char:draw()
 
    love.graphics.draw(
       self.animation.spritesheet,
-      self.animation.quads[1],
+      self.animation.quads[spriteNum],
       self.x + offset, self.y,
       0,
       self.direction * xscale,

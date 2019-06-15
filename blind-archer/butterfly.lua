@@ -13,8 +13,11 @@ function Butterfly:new(x, y)
 
    -- archer is always the first active
    obj.char.active = false
+   obj.moving = false
 
    obj.char.update = function(self, dt)
+      self.animation.currentTime = self.animation.currentTime + dt
+
       if not self.active then
          return
       end

@@ -6,7 +6,7 @@ Archer.__index = Archer
 function Archer:new(x, y)
    local obj = {}
    setmetatable(obj,Archer)
-   obj.char = Char:new(10, 10, 16, 16, "img/BetterArcher.png", 0.3)
+   obj.char = Char:new(10, 10, 16, 16, "img/BetterArcher.png", 0.5)
    obj.swapCooldown = 1
    obj.currentSwapCooldown = 0
    obj.butterfly = nil
@@ -14,6 +14,8 @@ function Archer:new(x, y)
    obj.char.active = true
 
    obj.char.update = function(self, dt)
+      self.animation.currentTime = self.animation.currentTime + dt
+
       if not self.active then
          return
       end
