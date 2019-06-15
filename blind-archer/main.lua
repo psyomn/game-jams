@@ -1,3 +1,5 @@
+local sti = require "sti/sti"
+
 function love.load()
    -- theme = love.audio.newSource("snd/song.ogg", "stream")
    -- theme:setLooping(true)
@@ -15,6 +17,42 @@ function love.load()
    xscale = windowWidth / sett.window.x
    yscale = windowHeight / sett.window.y
 
+   map = sti("img/maps.lua", {"box2d"})
+   world = love.physics.newWorld(0, 0)
+   map:box2d_init(world)
+   map:addCustomLayer("Sprite Layer", 3)
+
+   local layer = map.layers["Sprite Layer"]
+   local player
+   for k, object in pairs(map.objects) do
+      if object.name == "player" then
+         player = object
+         print("found")
+         break
+      end
+   end
+
+   local sprite = love.graphics.newImage("img/Archer.png")
+   layer.player = {
+      sprite = love.graphics.newImage("img/Archer.png"),
+      x = 20,
+      y = 20,
+      ox = sprite:getWidth() / 2,
+      oy = sprite:getHeight() / 1.35,
+      r = 0,
+   }
+
+   layer.draw = function(self)
+      love.graphics.draw(
+         self.player.sprite,
+         math.floor(self.player.x),
+         math.floor(self.player.y),
+         0, 1, 1,
+         self.player.ox,
+         self.player.oy
+      )
+   end
+
    drawable = {}
 end
 
@@ -30,6 +68,9 @@ function love.update(dt)
 end
 
 function love.draw()
+   -- map:box2d_draw()
+   map:draw()
+
    if gameState == "main" then
       for i, el in pairs(drawable) do
          el:draw()

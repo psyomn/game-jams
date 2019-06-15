@@ -7,5 +7,5 @@ function love.conf(t)
    t.window.width = s.window.x
    t.window.height = s.window.y
    t.window.title = "blind archer"
-   t.window.fullscreen = true
+   t.window.fullscreen = false
 end
