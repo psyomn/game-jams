@@ -1,5 +1,5 @@
 function settings()
    local obj = {}
-   obj.window = {x = 144, y = 160}
+   obj.window = {x = 288, y = 320}
    return obj
 end
