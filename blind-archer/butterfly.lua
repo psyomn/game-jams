@@ -7,6 +7,9 @@ function Butterfly:new(x, y)
    local obj = {}
    setmetatable(obj,Butterfly)
    obj.char = Char:new(10, 10, 9, 8, "img/butterfly.png", 0.3)
+   obj.archer = nil
+   obj.swapCooldown = 1
+   obj.currentSwapCooldown = 0
 
    -- archer is always the first active
    obj.char.active = false
@@ -16,8 +19,15 @@ function Butterfly:new(x, y)
          return
       end
 
-      if love.keyboard.isDown("e") then
-         self.active = not self.active
+      if obj.currentSwapCooldown <= 0 and love.keyboard.isDown("e") then
+         self.active = false
+         obj.currentSwapCooldown = obj.swapCooldown
+         obj.archer.char.active = true
+      end
+
+      obj.currentSwapCooldown = obj.currentSwapCooldown - dt
+      if obj.currentSwapCooldown < 0 then
+         obj.currentSwapCooldown = 0
       end
 
       if love.keyboard.isDown("space") then
@@ -34,7 +44,6 @@ function Butterfly:new(x, y)
 
       if love.keyboard.isDown("down", "s") then
       end
-
    end
 
    return obj
@@ -46,4 +55,8 @@ end
 
 function Butterfly:draw()
    self.char:draw()
+end
+
+function Butterfly:couple(other)
+   self.archer = other
 end

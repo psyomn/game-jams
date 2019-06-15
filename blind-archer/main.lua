@@ -22,6 +22,8 @@ function love.load()
 
    ch = Archer:new(10, 10)
    bu = Butterfly:new(20, 10)
+   ch:couple(bu)
+   bu:couple(ch)
 
    drawable = {ch, bu}
    updateable = {ch, bu}

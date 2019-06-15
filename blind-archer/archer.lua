@@ -6,8 +6,10 @@ Archer.__index = Archer
 function Archer:new(x, y)
    local obj = {}
    setmetatable(obj,Archer)
-   obj.char = Char:new(
-      10, 10, 16, 16, "img/BetterArcher.png", 0.3)
+   obj.char = Char:new(10, 10, 16, 16, "img/BetterArcher.png", 0.3)
+   obj.swapCooldown = 1
+   obj.currentSwapCooldown = 0
+   obj.butterfly = nil
 
    obj.char.active = true
 
@@ -16,8 +18,16 @@ function Archer:new(x, y)
          return
       end
 
-      if love.keyboard.isDown("e") then
-         self.active = not self.active
+      if obj.currentSwapCooldown <= 0 and love.keyboard.isDown("e") then
+         self.active = false
+         obj.butterfly.char.active = true
+         obj.currentSwapCooldown = obj.swapCooldown
+         obj.butterfly.currentSwapCooldown = obj.swapCooldown
+      end
+
+      obj.currentSwapCooldown = obj.currentSwapCooldown - dt
+      if obj.currentSwapCooldown < 0 then
+         obj.currentSwapCooldown = 0
       end
 
       if love.keyboard.isDown("space") then
@@ -34,7 +44,6 @@ function Archer:new(x, y)
 
       if love.keyboard.isDown("down", "s") then
       end
-
    end
 
    return obj
@@ -46,4 +55,8 @@ end
 
 function Archer:draw()
    self.char:draw()
+end
+
+function Archer:couple(other)
+   self.butterfly = other
 end
