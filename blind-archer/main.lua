@@ -6,6 +6,7 @@ function love.load()
    -- turn off antialiasing
    love.graphics.setDefaultFilter("nearest", "nearest", 1)
    love.graphics.setBackgroundColor(0.8, 1, 0.8)
+
    sett = settings()
 
    -- Music
