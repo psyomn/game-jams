@@ -45,7 +45,7 @@ function generate_platforms(grid_w, grid_h)
    table.insert(platforms, Platform:new(left, right, grid_h - 3, 16))
 
 
-   platform_h = math.random(1, grid_h - 8)
+   platform_h = math.random(1, grid_h - 10)
    for i= 1, platform_h do
 
       max_platform_w = math.floor(i/2) + 1
@@ -64,8 +64,6 @@ function generate_platforms(grid_w, grid_h)
       elseif last_right >= grid_w - 7 then
 	 right = last_left - 1
 	 left = right - math.random(1, max_platform_w)
-	 print(right)
-	 print(left)
 	 
       else
 	 if math.random() < 0.5 then	    
@@ -73,7 +71,7 @@ function generate_platforms(grid_w, grid_h)
 	    right = left + math.random(1, max_platform_w)-- / (grid_h / 4)
 	 else
 	    right = last_left - 1
-	    right = left - math.random(1, max_platform_w)-- / (grid_h / 4)
+	    left = right - math.random(1, max_platform_w)-- / (grid_h / 4)
 	 end
       end
 
