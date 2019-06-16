@@ -32,6 +32,19 @@ function select_quad(t_type, tileset, w, h)
       return love.graphics.newQuad(x * w, 3 * h, w, h, tileset:getDimensions())
    elseif t_type == "sky" then
       return love.graphics.newQuad(1 * w, 2 * h, w, h, tileset:getDimensions())
+
+   elseif t_type == "cloud_close" then
+      x = math.random(0, 2)
+      return love.graphics.newQuad(x * w, 0 * h, w, h, tileset:getDimensions())
+
+   elseif t_type == "cloud_medium" then
+      x = math.random(0, 3)
+      return love.graphics.newQuad(x * w, 1 * h, w, h, tileset:getDimensions())
+	    
+   elseif t_type == "cloud_far" then
+      x = math.random(0, 3)
+      --      return love.graphics.newQuad(x * w, 2 * h, w, h, tileset:getDimensions())
+      return love.graphics.newQuad(0 * w, 3 * h, w, h, tileset:getDimensions())
    end
 end
 
