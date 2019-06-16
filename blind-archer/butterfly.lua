@@ -37,12 +37,13 @@ function Butterfly:new(x, y)
          -- jump
       end
 
+      prevX, prevY = self.phys.body:getLinearVelocity()
       if love.keyboard.isDown("left", "a") then
-         self.x = self.x - self.speed * dt
+         self.char.body:setLinearVelocity(self.speed, prevY)
       end
 
       if love.keyboard.isDown("right", "d") then
-         self.x = self.x + self.speed * dt
+         self.char.body:setLinearVelocity(-self.speed, prevY)
       end
 
       if love.keyboard.isDown("down", "s") then

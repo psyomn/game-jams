@@ -3,29 +3,31 @@ require "butterfly"
 require "level"
 
 function love.load()
-   love.graphics.setBackgroundColor(1, 1, 1)
+   -- turn off antialiasing
+   love.graphics.setDefaultFilter("nearest", "nearest", 1)
+   love.graphics.setBackgroundColor(0.8, 1, 0.8)
+   sett = settings()
+
+   -- Music
    -- theme = love.audio.newSource("snd/song.ogg", "stream")
    -- theme:setLooping(true)
    -- theme:play()
 
-   -- turn off antialiasing
-   love.graphics.setDefaultFilter("nearest", "nearest", 1)
-   sett = settings()
+   -- Physics
+   love.physics.setMeter(16)
+   world = love.physics.newWorld(0, 9.81 * 64, true)
 
-   -- SCALING
+   -- Scaling
    windowWidth = love.graphics.getWidth()
    windowHeight = love.graphics.getHeight()
    xscale = windowWidth / sett.window.x
    yscale = windowHeight / sett.window.y
-
 
    -- Actors
    ch = Archer:new(10, 10)
    bu = Butterfly:new(20, 10)
    ch:couple(bu)
    bu:couple(ch)
-
-   world = love.physics.newWorld(0, 0)
 
    -- Level
    level = Level:new()
@@ -37,6 +39,8 @@ function love.load()
 end
 
 function love.update(dt)
+   world:update(dt)
+
    if love.keyboard.isDown("escape") then
       love.event.quit()
    end
