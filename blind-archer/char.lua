@@ -29,6 +29,13 @@ function Char:new(x, y,
    obj.img = love.graphics.newImage(imgSpritePath)
    obj.speed = sett.default.speed
 
+   local py = love.physics
+   obj.phys = {}
+   obj.phys.body = py.newBody(world, obj.w, obj.h, "dynamic")
+   obj.phys.shape = py.newRectangleShape(obj.w, obj.h)
+   obj.phys.fixture = py.newFixture(
+      obj.phys.body, obj.phys.shape, 5)
+
    obj.animation = newAnimation(
       obj.img, spriteWidth, spriteHeight, duration)
 
@@ -52,7 +59,9 @@ function Char:draw()
    love.graphics.draw(
       self.animation.spritesheet,
       self.animation.quads[spriteNum],
-      self.x + offset, self.y,
+      -- self.x + offset, self.y,
+      self.phys.body:getX(),
+      self.phys.body:getY(),
       0,
       self.direction * xscale,
       yscale)
