@@ -31,7 +31,7 @@ function Tile:new(t_type, pos_x, pos_y)
       obj.phys.body = py.newBody(world, obj.x, obj.y)
       obj.phys.shape = py.newRectangleShape(obj.tile_w, obj.tile_h - 10)
       obj.phys.fixture = py.newFixture(obj.phys.body, obj.phys.shape)
-      obj.phys.fixture:setFilterData(CATEGORY_PLAYER, FULL_MASK, GROUP_GROUND)
+      obj.phys.fixture:setFilterData(CATEGORY_SCENERY, FULL_MASK, GROUP_GROUND)
    end
 
    return obj

@@ -27,7 +27,9 @@ function Archer:new(x, y)
       if obj.currentShootCooldown > obj.shootCooldown and love.keyboard.isDown("q") then
          arr = Arrow:new(
             obj.char.phys.body:getX(),
-            obj.char.phys.body:getY(), 2500, 2500)
+            obj.char.phys.body:getY(),
+            obj.butterfly.char.phys.body:getX() * 2500,
+            obj.butterfly.char.phys.body:getY() * 2500)
 
          obj.currentShootCooldown = 0
          table.insert(drawable, arr)
