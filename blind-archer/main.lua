@@ -1,5 +1,6 @@
 require "archer"
 require "butterfly"
+require "level"
 
 function love.load()
    love.graphics.setBackgroundColor(1, 1, 1)
@@ -26,7 +27,10 @@ function love.load()
 
    world = love.physics.newWorld(0, 0)
 
-   drawable = {ch, bu}
+   -- Level
+   level = Level:new()
+
+   drawable = {ch, bu, level}
    updateable = {ch, bu}
 
    gameState = "main"
@@ -47,10 +51,10 @@ function love.update(dt)
    end
 end
 
-function love.draw()
+function love.draw(dt)
    if gameState == "main" then
       for i, el in pairs(drawable) do
-         el:draw()
+         el:draw(dt)
       end
    elseif gameState == "intro" then
    elseif gameState == "game_over" then
