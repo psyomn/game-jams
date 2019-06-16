@@ -20,6 +20,8 @@ function select_quad(t_type, tileset, w, h)
    if t_type == "ground" then
       x = math.random(0, 3)
       return love.graphics.newQuad(x * w, 3 * h, w, h, tileset:getDimensions())
+   elseif t_type == "sky" then
+      return love.graphics.newQuad(1 * w, 2 * h, w, h, tileset:getDimensions())
    end
 end
 

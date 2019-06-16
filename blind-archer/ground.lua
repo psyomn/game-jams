@@ -7,10 +7,10 @@ function Ground:new(grid_w, grid_h, tile_wh)
    local obj
    obj = {}
    setmetatable(obj, Ground)
-   obj.width = w
+   obj.width = grid_w
    obj.tiles = {}
-   for i = 0, grid_w - 1 do
-      t = Tile:new("ground", i, grid_h + 1)
+   for i = 0, obj.width - 1 do
+      t = Tile:new("ground", i, grid_h - 1)
       table.insert(obj.tiles, t)
    end
    return obj

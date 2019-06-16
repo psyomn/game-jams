@@ -30,7 +30,7 @@ function love.load()
    -- Level
    level = Level:new()
 
-   drawable = {ch, bu, level}
+   drawable = {level, ch, bu}
    updateable = {ch, bu}
 
    gameState = "main"
