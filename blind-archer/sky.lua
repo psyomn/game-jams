@@ -22,7 +22,7 @@ function Sky:new(grid_w, grid_h, tile_wh)
    
    for j = 0, obj.height/4 do
       for i = 0, obj.width do
-	 if math.random() < 0.3 then
+	 if math.random() < 0.2 then
 	    t = Tile:new("cloud_close", i, j)
 	    obj.tiles[i][j] = t
 	 end
@@ -31,17 +31,17 @@ function Sky:new(grid_w, grid_h, tile_wh)
 
    for j = obj.height/4, obj.height/2 do
       for i = 0, obj.width do
-	 if math.random() < 0.3 then
+	 if math.random() < 0.2 then
 	    t = Tile:new("cloud_medium", i, j)
 	    obj.tiles[i][j] = t
 	 end
       end
    end
 
-   for j = obj.height/2, obj.height do
+   for j = obj.height/4, obj.height do
       for i = 0, obj.width do
 	 if math.random() < 0.3 then
-	    t = Tile:new("cloud_close", i, j)
+	    t = Tile:new("cloud_far", i, j)
 	    obj.tiles[i][j] = t
 	 end
       end

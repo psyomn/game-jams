@@ -43,8 +43,8 @@ function select_quad(t_type, tileset, w, h)
 	    
    elseif t_type == "cloud_far" then
       x = math.random(0, 3)
-      --      return love.graphics.newQuad(x * w, 2 * h, w, h, tileset:getDimensions())
-      return love.graphics.newQuad(0 * w, 3 * h, w, h, tileset:getDimensions())
+      return love.graphics.newQuad(x * w, 2 * h, w, h, tileset:getDimensions())
+      --  return love.graphics.newQuad(0 * w, 3 * h, w, h, tileset:getDimensions())
    end
 end
 
