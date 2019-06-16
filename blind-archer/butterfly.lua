@@ -55,7 +55,7 @@ function Butterfly:new(x, y)
       if love.keyboard.isDown("down", "s") then
       end
 
-      if love.keyboard.isDown("up", "w") then
+      if love.keyboard.isDown("up", "w", "space") then
          self.phys.body:setLinearVelocity(prevX, -self.speed)
       end
    end
