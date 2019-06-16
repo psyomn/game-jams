@@ -15,6 +15,10 @@ function Butterfly:new(x, y)
    obj.char.active = false
    obj.moving = false
 
+   -- obj.char.phys.fixture = love.physics.newFixture(
+   --    obj.char.phys.body, obj.char.phys.shape, 0.1)
+
+
    obj.char.update = function(self, dt)
       self.animation.currentTime = self.animation.currentTime + dt
 
@@ -39,11 +43,11 @@ function Butterfly:new(x, y)
 
       prevX, prevY = self.phys.body:getLinearVelocity()
       if love.keyboard.isDown("left", "a") then
-         self.char.body:setLinearVelocity(self.speed, prevY)
+         self.phys.body:setLinearVelocity(-self.speed, prevY)
       end
 
       if love.keyboard.isDown("right", "d") then
-         self.char.body:setLinearVelocity(-self.speed, prevY)
+         self.phys.body:setLinearVelocity(self.speed, prevY)
       end
 
       if love.keyboard.isDown("down", "s") then

@@ -13,6 +13,14 @@ function Tile:new(t_type, pos_x, pos_y)
    obj.quad = select_quad(obj.tile_type, obj.tileset, obj.tile_w, obj.tile_h)
    obj.x = pos_x * obj.tile_w
    obj.y = pos_y * obj.tile_h
+
+   -- physics
+   local py = love.physics
+   obj.phys = {}
+   obj.phys.body = py.newBody(world, obj.x, obj.y)
+   obj.phys.shape = py.newRectangleShape(obj.tile_w, obj.tile_h)
+   obj.phys.fixture = py.newFixture(obj.phys.body, obj.phys.shape)
+
    return obj
 end
 

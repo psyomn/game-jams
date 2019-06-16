@@ -34,7 +34,7 @@ function Char:new(x, y,
    obj.phys.body = py.newBody(world, obj.w, obj.h, "dynamic")
    obj.phys.shape = py.newRectangleShape(obj.w, obj.h)
    obj.phys.fixture = py.newFixture(
-      obj.phys.body, obj.phys.shape, 5)
+      obj.phys.body, obj.phys.shape, 1)
 
    obj.animation = newAnimation(
       obj.img, spriteWidth, spriteHeight, duration)
