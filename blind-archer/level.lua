@@ -7,22 +7,22 @@ function Level:new()
    local obj
    obj = {}
    setmetatable(obj, Level)
-   grid_w = 16
-   grid_h = 9
-   tile_w = 16
-   tile_h = 16
+   obj.grid_w = 20
+   obj.grid_h = 18
+   obj.tile_w = 16
+   obj.tile_h = 16
 
-   grid = {}
-   for i = 1, tile_w do
-      for j = 1, tile_h do
-	 grid[i] = {}
-	 grid[i][j] = 0
+   obj.grid = {}
+   for i = 1, obj.tile_w do
+      for j = 1, obj.tile_h do
+	 obj.grid[i] = {}
+	 obj.grid[i][j] = 0
       end
    end
 
-   ground = Ground:new(grid_w, grid_h, tile_w)
-   platforms = {}
-   clouds = {}
+   obj.ground = Ground:new(obj.grid_w, obj.grid_h, obj.tile_w)
+   obj.platforms = {}
+   obj.clouds = {}
 
    
 
@@ -35,6 +35,6 @@ end
 
 
 function Level:draw(dt)
-   ground:draw(dt)
+   self.ground:draw(dt)
 end
 		     

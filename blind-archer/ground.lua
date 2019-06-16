@@ -7,18 +7,18 @@ function Ground:new(grid_w, grid_h, tile_wh)
    local obj
    obj = {}
    setmetatable(obj, Ground)
-   width = w
-   tiles = {}
-   for i = 1, grid_w do
-      t = Tile:new("ground", i, grid_h)
-      table.insert(tiles, t)
+   obj.width = w
+   obj.tiles = {}
+   for i = 0, grid_w - 1 do
+      t = Tile:new("ground", i, grid_h + 1)
+      table.insert(obj.tiles, t)
    end
    return obj
 end
 
 function Ground:draw(dt)
-   for i= 1, table.getn(tiles) do
-      tiles[i]:draw(dt)
+   for i= 1, table.getn(self.tiles) do
+      self.tiles[i]:draw(dt)
    end
 end
 
