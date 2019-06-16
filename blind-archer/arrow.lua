@@ -3,15 +3,15 @@ require "char"
 Arrow = {}
 Arrow.__index = Arrow
 
-function Arrow:new(x, y, vel_x, vel_y)
+function Arrow:new(x, y, pos_x, pos_y)
    local obj = {}
    setmetatable(obj,Arrow)
    obj.char = Char:new(
       x, y,
       10, 3, "img/arrow.png", 0.1)
 
-   obj.vel_x = vel_x
-   obj.vel_y = vel_y
+   obj.pos_x = pos_x
+   obj.pos_y = pos_y
    obj.expiration = 5
 
    obj.char.phys.fixture:setFilterData(
@@ -21,13 +21,13 @@ function Arrow:new(x, y, vel_x, vel_y)
 
    obj.char.phys.fixture:setUserData(obj)
 
-   obj.char.phys.body:setLinearVelocity(vel_x, vel_y)
    obj.char.phys.body:setLinearDamping(8)
 
    return obj
 end
 
 function Arrow:update(dt)
+   self.char.phys.body:setLinearVelocity(self.pos_x, self.pos_y)
    self.expiration = self.expiration - dt
 end
 
