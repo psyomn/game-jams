@@ -21,8 +21,3 @@ function Ground:draw(dt)
       self.tiles[i]:draw(dt)
    end
 end
-
-
-
-
-

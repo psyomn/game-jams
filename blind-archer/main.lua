@@ -1,3 +1,4 @@
+require "categories"
 require "archer"
 require "butterfly"
 require "level"
@@ -17,6 +18,7 @@ function love.load()
    -- Physics
    love.physics.setMeter(16)
    world = love.physics.newWorld(0, 9.81 * 64, true)
+   world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 
    -- Scaling
    windowWidth = love.graphics.getWidth()
@@ -67,4 +69,27 @@ function love.draw(dt)
 
    -- draw borders of drawing area
    love.graphics.rectangle("line", 0, 0, windowWidth, windowHeight)
+end
+
+--
+-- Physics
+--
+function beginContact(fixA, fixB)
+   categoryA, maskA, groupA = fixA:getFilterData()
+   categoryB, maskB, groupB = fixB:getFilterData()
+
+   if groupA == GROUP_PLAYER and groupB == GROUP_GROUND or
+      groupA == GROUP_GROUND and groupB == GROUP_PLAYER then
+      -- player touches ground tile
+      ch:setJump(false)
+   end
+end
+
+function endContact()
+end
+
+function preSolve()
+end
+
+function postSolve()
 end

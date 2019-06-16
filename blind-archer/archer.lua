@@ -10,8 +10,13 @@ function Archer:new(x, y)
    obj.swapCooldown = 1
    obj.currentSwapCooldown = 0
    obj.butterfly = nil
+   obj.jump = false
 
    obj.char.active = true
+
+   obj.char.phys.fixture:setFilterData(CATEGORY_PLAYER, FULL_MASK, GROUP_PLAYER)
+   -- categories, mask, group = obj.char.phys.fixture:getFilterData()
+   -- print("categories: ", categories, "mask ", mask, "group ", group)
 
    obj.char.update = function(self, dt)
       self.animation.currentTime = self.animation.currentTime + dt
@@ -32,8 +37,9 @@ function Archer:new(x, y)
          obj.currentSwapCooldown = 0
       end
 
-      if love.keyboard.isDown("space") then
-         -- jump
+      if not obj.jump and love.keyboard.isDown("space") then
+         obj.jump = true
+         self.phys.body:applyLinearImpulse(0, -self.speed * 2)
       end
 
       prevX, prevY = self.phys.body:getLinearVelocity()
@@ -62,4 +68,8 @@ end
 
 function Archer:couple(other)
    self.butterfly = other
+end
+
+function Archer:setJump(jump)
+   self.jump = jump
 end
