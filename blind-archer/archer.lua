@@ -28,8 +28,8 @@ function Archer:new(x, y)
          arr = Arrow:new(
             obj.char.phys.body:getX(),
             obj.char.phys.body:getY(),
-            obj.butterfly.char.phys.body:getX() * 2500,
-            obj.butterfly.char.phys.body:getY() * 2500)
+            obj.butterfly.char.phys.body:getX() * 25,
+            obj.butterfly.char.phys.body:getY() * 25)
 
          obj.currentShootCooldown = 0
          table.insert(drawable, arr)

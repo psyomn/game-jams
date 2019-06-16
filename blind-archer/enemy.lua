@@ -31,6 +31,9 @@ function Enemy:new(x, y, theType)
 
    obj.char.update = function(self, dt)
       self.animation.currentTime = self.animation.currentTime + dt
+
+      prevX, prevY = self.phys.body:getLinearVelocity()
+      self.phys.body:setLinearVelocity(-10, prevY)
    end
 
    return obj
