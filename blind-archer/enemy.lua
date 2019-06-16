@@ -6,18 +6,20 @@ Enemy.__index = Enemy
 EnemyType = {imp = "img/Imp.png", gnome = "img/Gnome.png"}
 
 function Enemy.makeGnome(x, y)
-   return Enemy:new(x, y, EnemyType.gnome)
+   -- 16, 16
+   return Enemy:new(x, y, EnemyType.gnome, 16, 16)
 end
 
 function Enemy.makeImp(x, y)
-   return Enemy:new(x, y, EnemyType.img)
+   -- 14, 14
+   return Enemy:new(x, y, EnemyType.imp, 14, 14)
 end
 
-function Enemy:new(x, y, theType)
+function Enemy:new(x, y, theType, w, h)
    local obj = {}
    setmetatable(obj, Enemy)
 
-   obj.char = Char:new(x, y, 16, 16, theType, 0.3)
+   obj.char = Char:new(x, y, w, h, theType, 0.3)
 
    obj.phys = {}
    obj.char.phys.fixture:setFilterData(
@@ -32,7 +34,7 @@ function Enemy:new(x, y, theType)
    obj.char.update = function(self, dt)
       self.animation.currentTime = self.animation.currentTime + dt
 
-      prevX, prevY = self.phys.body:getLinearVelocity()
+      _prevX, prevY = self.phys.body:getLinearVelocity()
       self.phys.body:setLinearVelocity(-10, prevY)
    end
 

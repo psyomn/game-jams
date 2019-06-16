@@ -3,6 +3,7 @@ require "archer"
 require "butterfly"
 require "level"
 require "enemy"
+require "director"
 
 function love.load()
    -- turn off antialiasing
@@ -30,6 +31,8 @@ function love.load()
    -- Actors
    ch = Archer:new(10, 10)
    bu = Butterfly:new(20, 10)
+   dir = Director:new()
+
    ch:couple(bu)
    bu:couple(ch)
 
@@ -39,7 +42,7 @@ function love.load()
    level = Level:new()
 
    drawable = {level, ch, bu, e1}
-   updateable = {ch, bu, e1}
+   updateable = {ch, bu, e1, dir}
 
    gameState = "main"
 end
