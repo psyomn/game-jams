@@ -53,6 +53,8 @@ function love.update(dt)
    elseif gameState == "game_over" then
    end
 
+   -- gets rid of expired objects
+   updateable = cleanTable(updateable)
    for k, el in pairs(updateable) do
       el:update(dt)
    end
@@ -60,6 +62,7 @@ end
 
 function love.draw(dt)
    if gameState == "main" then
+      drawable = cleanTable(drawable)
       for i, el in pairs(drawable) do
          el:draw(dt)
       end

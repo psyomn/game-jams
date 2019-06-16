@@ -20,3 +20,19 @@ function newAnimation(image, width, height, duration)
 
    return animation
 end
+
+-- apparently if you use pairs in lua, it ignores nil entries in your
+-- table.
+function cleanTable(t)
+   for i, el in pairs(t) do
+      if el.isExpired ~= nil and el:isExpired() then
+         t[i] = nil
+      end
+   end
+
+   ret = {}
+   for i, el in pairs(t) do
+      table.insert(ret, el)
+   end
+   return ret
+end

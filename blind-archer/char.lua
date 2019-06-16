@@ -31,7 +31,7 @@ function Char:new(x, y,
 
    local py = love.physics
    obj.phys = {}
-   obj.phys.body = py.newBody(world, obj.w, obj.h, "dynamic")
+   obj.phys.body = py.newBody(world, obj.x, obj.y, "dynamic")
    obj.phys.shape = py.newRectangleShape(obj.w, obj.h)
    obj.phys.fixture = py.newFixture(
       obj.phys.body, obj.phys.shape, 1)
