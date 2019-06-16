@@ -2,6 +2,7 @@ require "categories"
 require "archer"
 require "butterfly"
 require "level"
+require "enemy"
 
 function love.load()
    -- turn off antialiasing
@@ -32,11 +33,13 @@ function love.load()
    ch:couple(bu)
    bu:couple(ch)
 
+   e1 = Enemy.makeGnome(30, 10)
+
    -- Level
    level = Level:new()
 
-   drawable = {level, ch, bu}
-   updateable = {ch, bu}
+   drawable = {level, ch, bu, e1}
+   updateable = {ch, bu, e1}
 
    gameState = "main"
 end
@@ -85,6 +88,18 @@ function beginContact(fixA, fixB)
       groupA == GROUP_GROUND and groupB == GROUP_PLAYER then
       -- player touches ground tile
       ch:setJump(false)
+   end
+
+   if groupA == GROUP_PROJECTILE and groupB == GROUP_ENEMY or
+   groupB == GROUP_PROJECTILE and groupA == GROUP_ENEMY then
+      -- arrow hits enemy in the knee
+      uObjA = fixA:getUserData()
+      uObjB = fixB:getUserData()
+      uObjA:setExpired(true)
+      uObjB:setExpired(true)
+
+      uObjA.char.phys.fixture:destroy()
+      uObjB.char.phys.fixture:destroy()
    end
 end
 
