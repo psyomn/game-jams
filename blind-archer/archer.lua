@@ -1,4 +1,5 @@
 require "char"
+require "arrow"
 
 Archer = {}
 Archer.__index = Archer
@@ -9,17 +10,30 @@ function Archer:new(x, y)
    obj.char = Char:new(10, 10, 16, 16, "img/BetterArcher.png", 0.5)
    obj.swapCooldown = 1
    obj.currentSwapCooldown = 0
+   obj.shootCooldown = 0.3
+   obj.currentShootCooldown = 0
    obj.butterfly = nil
    obj.jump = false
 
    obj.char.active = true
 
    obj.char.phys.fixture:setFilterData(CATEGORY_PLAYER, FULL_MASK, GROUP_PLAYER)
-   -- categories, mask, group = obj.char.phys.fixture:getFilterData()
-   -- print("categories: ", categories, "mask ", mask, "group ", group)
 
    obj.char.update = function(self, dt)
       self.animation.currentTime = self.animation.currentTime + dt
+
+      -- Arrow/projectile creation
+      obj.currentShootCooldown = obj.currentShootCooldown + dt
+      if obj.currentShootCooldown > obj.shootCooldown and love.keyboard.isDown("q") then
+         arr = Arrow:new(
+            obj.char.phys.body:getX(),
+            obj.char.phys.body:getY(), 10, 10)
+
+         print(obj.char.phys.body:getX(), obj.char.phys.body:getY())
+         obj.currentShootCooldown = 0
+
+         table.insert(drawable, arr)
+      end
 
       if not self.active then
          return
@@ -49,9 +63,6 @@ function Archer:new(x, y)
 
       if love.keyboard.isDown("right", "d") then
          self.phys.body:setLinearVelocity(self.speed, prevY)
-      end
-
-      if love.keyboard.isDown("down", "s") then
       end
    end
 
