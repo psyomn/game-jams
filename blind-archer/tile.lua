@@ -24,7 +24,7 @@ function Tile:new(t_type, pos_x, pos_y)
    obj.x = pos_x * obj.tile_w
    obj.y = pos_y * obj.tile_h
 
-   if t_type == "ground" then
+   if obj.tile_type == "ground" or obj.tile_type == "platform" then
       -- physics
       local py = love.physics
       obj.phys = {}
