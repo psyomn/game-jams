@@ -15,9 +15,8 @@ function Butterfly:new(x, y)
    obj.char.active = false
    obj.moving = false
 
-   -- obj.char.phys.fixture = love.physics.newFixture(
-   --    obj.char.phys.body, obj.char.phys.shape, 0.1)
-
+   obj.char.phys.fixture = love.physics.newFixture(
+      obj.char.phys.body, obj.char.phys.shape, 0.01)
 
    obj.char.update = function(self, dt)
       self.animation.currentTime = self.animation.currentTime + dt
@@ -51,6 +50,10 @@ function Butterfly:new(x, y)
       end
 
       if love.keyboard.isDown("down", "s") then
+      end
+
+      if love.keyboard.isDown("up", "w") then
+         self.phys.body:setLinearVelocity(prevX, -self.speed)
       end
    end
 
