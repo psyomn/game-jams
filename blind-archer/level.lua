@@ -1,5 +1,6 @@
 require "ground"
 require "sky"
+require "platform"
 
 Level = {}
 Level.__index = Level
@@ -24,7 +25,8 @@ function Level:new()
 
    obj.sky = Sky:new(obj.grid_w, obj.grid_h, obj.tile_w)
    obj.ground = Ground:new(obj.grid_w, obj.grid_h, obj.tile_w)
-   obj.platforms = {}
+   obj.platform = Platform:new(10, 15, 17, 16)
+   obj.platforms = {obj.platform}
 
    
    return obj
@@ -38,5 +40,6 @@ end
 function Level:draw(dt)
    self.sky:draw(dt)
    self.ground:draw(dt)
+   self.platform:draw(dt)
 end
 		     
