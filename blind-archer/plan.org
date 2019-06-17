@@ -1,0 +1,10 @@
+* TODO Add intro screen
+* TODO Add game over screen
+* TODO Add hearts
+* TODO Add score
+* TODO Fix fullscreen scaling
+* TODO Sound effects
+* TODO music [0/3]
+** TODO main theme
+** TODO title theme
+** TODO game over theme
