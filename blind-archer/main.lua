@@ -4,6 +4,7 @@ require "butterfly"
 require "level"
 require "enemy"
 require "director"
+require "scene"
 
 function love.load()
    -- turn off antialiasing
@@ -17,11 +18,18 @@ function love.load()
    -- theme:setLooping(true)
    -- theme:play()
 
+   -- Game state!
+   gameState = "intro"
+
    -- Scaling
    windowWidth = love.graphics.getWidth()
    windowHeight = love.graphics.getHeight()
    xscale = windowWidth / sett.window.x
    yscale = windowHeight / sett.window.y
+
+   -- Scenes
+   sceneIntro = Scene.makeIntro()
+   sceneGameOver = Scene.makeGameOver()
 
    -- Physics
    love.physics.setMeter(16)
@@ -65,8 +73,6 @@ function love.load()
 
    drawable = {level, ch, bu, e1}
    updateable = {ch, bu, e1, dir}
-
-   gameState = "main"
 end
 
 function love.update(dt)
@@ -77,25 +83,28 @@ function love.update(dt)
    end
 
    if gameState == "main" then
+      -- gets rid of expired objects
+      updateable = cleanTable(updateable)
+      for k, el in pairs(updateable) do
+         el:update(dt)
+      end
    elseif gameState == "intro" then
+      sceneIntro:update(dt)
    elseif gameState == "game_over" then
-   end
-
-   -- gets rid of expired objects
-   updateable = cleanTable(updateable)
-   for k, el in pairs(updateable) do
-      el:update(dt)
+      sceneGameOver:update(dt)
    end
 end
 
-function love.draw(dt)
+function love.draw()
    if gameState == "main" then
       drawable = cleanTable(drawable)
       for i, el in pairs(drawable) do
          el:draw(dt)
       end
    elseif gameState == "intro" then
+      sceneIntro:draw()
    elseif gameState == "game_over" then
+      sceneGameOver:draw()
    end
 
    -- draw borders of drawing area
